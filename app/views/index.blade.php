@@ -2,42 +2,38 @@
 
 
 @section('title')
-Project 3: Random Paragraph and User Generator
+Project 4: Application Organizer
 @stop
 
 
 
 @section('content')
 
+<div class = 'container'>
 	<div class='row'>
-		<div class="paragraph col-lg-6 ">
-			<h3>What is Lorem Ipsum?</h3>
-			<p>Lorem Ipsum is a dummy type of text used in the printing and typesetting industry. It has been the standard dummy text ever since the 1500s. It has survived not only five centuries, but also the leap into electronic typesetting.
-			</p>
-
-			<p><a href="http://www.lipsum.com">Learn more &raquo;</a></p>
-
-			<h4>This tool generates dummy text using Lorem Ipsum.
-			</h4>
-
-			
+		<?php require(app_path().'/views/component/navTop.php') ?>
 
 
+		<!--be careful with the path-->
+		<?php require(app_path().'/views/component/carousel.blade.php') ?>
 
-			<a href='/paragraph' class="btn btn-primary btn-lg" role="button" >paragraph generator</a> 
 
-		</div><!--paragraph-->
+		<div class="info col-lg-6">
+			<h3>Track Information</h3>
+			<p>Keep track of information you collect on your recommendation letter recipient, job search, or university application.</p>
+			<h3>Monitor Progress</h3>
+			<p>Monitor your tasks from start through end with ease</p>
+			<h3>Stay Informed</h3>
+			<p>Receive updates automatically or as needed</p>
+		</div><!--info-->
 
-		<div class="user col-lg-6">
+		<?php require(app_path().'/views/component/lefticon.php') ?>
 
-			<h4>This tool generates random user data. 			Like Lorem Ipsum, but for people.
-			</h4>
 
-			<a href='/user' class="btn btn-primary btn-lg" role="button" >user generator</a>
-		</div> <!--user-->
+
 
 	</div> <!--row-->
-	@stop
+</div><!--container-->
+@stop
 
-	@section('returnHome')
-	@stop
+	

@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'OrgController@showIndex');
+Route::get('paragraph', 'OrgController@getCreateParagraph');
+Route::post('paragraph', 'OrgController@postCreateParagraph');
+
+Route::get('user', 'OrgController@getCreateUser');
+Route::post('user', 'OrgController@postCreateUser');
+
+
