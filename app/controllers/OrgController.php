@@ -5,8 +5,8 @@ class OrgController extends BaseController {
 		return View::make('index');
 	}
 
-	public function getCreateParagraph() {
-		return View::make('paragraph');
+	public function getCreateRegisterForm() {
+		return View::make('register_form');
 	}
 
 

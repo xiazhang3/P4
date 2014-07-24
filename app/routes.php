@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'OrgController@showIndex');
-Route::get('paragraph', 'OrgController@getCreateParagraph');
+Route::get('registerForm', 'OrgController@getCreateRegisterForm');
 Route::post('paragraph', 'OrgController@postCreateParagraph');
 
 Route::get('user', 'OrgController@getCreateUser');

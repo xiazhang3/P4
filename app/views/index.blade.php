@@ -10,15 +10,12 @@ Project 4: Application Organizer
 @section('content')
 
 <div class = 'container'>
-	<div class='row'>
-		<?php require(app_path().'/views/component/navTop.php') ?>
-
-
+	<div class = 'row'>
 		<!--be careful with the path-->
 		<?php require(app_path().'/views/component/carousel.blade.php') ?>
 
-
-		<div class="info col-lg-6">
+		<!--somehow the col-lg-6 does not work for safari-->
+		<div class='info col-md-6'>
 			<h3>Track Information</h3>
 			<p>Keep track of information you collect on your recommendation letter recipient, job search, or university application.</p>
 			<h3>Monitor Progress</h3>
@@ -28,10 +25,6 @@ Project 4: Application Organizer
 		</div><!--info-->
 
 		<?php require(app_path().'/views/component/lefticon.php') ?>
-
-
-
-
 	</div> <!--row-->
 </div><!--container-->
 @stop

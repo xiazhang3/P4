@@ -1,11 +1,11 @@
-<div class="lefticon col-lg-6">
+<div class="lefticon col-md-6">
 			<br>
 			<div class="col-sm-6 theBest">
 					<div class="media">
                     	<div class="pull-left">
                     		<img src="/img/web.png" alt="...">
                         </div>
-						<div class="media-body">Web-based</div>
+						<div class="media-body">Web Based</div>
                     </div>
 				
 					<div class="media">
