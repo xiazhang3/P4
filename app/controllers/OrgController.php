@@ -1,6 +1,18 @@
 <?php
 
 class OrgController extends BaseController {
+
+	public function __construct() {
+
+        $this->beforeFilter('guest', array('only' =>
+                            array('getRegisterForm')));//add filter to register form
+   
+		$this->beforeFilter('csrf', array('only' =>
+                            array('postRegisterForm')));
+
+    }
+
+
 	public function showIndex(){
 		return View::make('index');
 	}
@@ -10,93 +22,79 @@ class OrgController extends BaseController {
 	}
 
 
-	public function getCreateUser() {
-		return View::make('user');
-	}
 
-	//This function requires "badcow/lorem-ipsum": "dev-master"
-	public function postCreateParagraph(){
-		$paraData = Input::all();
-		$paraNum = (int)Input::get('num_paragraph');
+	public function postRegisterForm() {
 
-		//This is the validation section////////////////////
-		//alpha_num does not work, treat num_paragraph as string, max is then the string length
+		//validate inputs
+		//remove white space of the inputs
+		$registerData = array_map('trim', Input::all());
+
+		//careful no space should be between 'unique:users,email' otherwise column not found
 		$rules = array(
-			'num_paragraph' => array('numeric', 'required', 'min:1', 'max:20')
+			'lastName' => array('alpha', 'required'),
+			'firstName' => array('alpha', 'required'),
+			'userName' => array('alpha_num', 'required', 'unique:users,username'),
+			'inputEmail3' => array('email', 'required', 'unique:users,email' ),
+			'inputPassword3' => array('required', 'min:6'),
+			'inputPassword3_confirmation' => array('required', 'min:6', 'same:inputPassword3'),
+			'terms'=>'accepted' 
 		);
 
 		$message = array(
-			'numeric' => 'Please enter a number.',
-			'required' => 'This field is required',
-			'min' => 'Please enter a number larger than or equal to 1',
-			'max' => 'Please enter a numbe less than or equal to 20'
+			'alpha' => 'Please enter alphabetical characters.',
+			'required' => 'This field is required.',
+			'min' => 'The length is at least 6.',
+			'email' => 'Please provide valid email address',
+			'unique' => 'Already exsits, choose another one',
+			'same' => 'Please verify your password.',
 		);
 
-		$validator = Validator::make($paraData, $rules, $message);
+		$validator = Validator::make($registerData, $rules, $message);
 
 		if ($validator->fails() ) {
-			return Redirect::to('paragraph')->withInput()->withErrors($validator);
+			return Redirect::to('registerForm')->withInput()->withErrors($validator);
 
 		}
-
-		//////////////////////////////////////////////////////////////
-
-
-
-		$generator = new Badcow\LoremIpsum\Generator();
-		$paragraphs = $generator->getParagraphs($paraNum);
-
-		//modify the usage accordingly
-		echo '<p>'.implode('</p><p>', $paragraphs).'</p>';
-
-	}
-
-	//This function requires "fzaninotto/faker": "1.5.*@dev"
-	public function postCreateUser() {
-		$userData = Input::all();
-		$userNum = (int)Input::get('num_user');
-		$userEmail = Input::get('add_email');
-		$userAddress = Input::get('add_address');
-
-		//This is the validation section////////////////////
-		//if use alpha_num does not work, treat num_user as string, max is then the string length
-		$rules = array(
-			'num_user' => array('numeric', 'required', 'min:1', 'max:100')
-		);
-
-		$message = array(
-			'numeric' => 'Please enter a number.',
-			'required' => 'This field is required',
-			'min' => 'Please enter a number larger than or equal to 1',
-			'max' => 'Please enter a numbe less than or equal to 100'
-		);
-
-		$validator = Validator::make($userData, $rules, $message);
-
-		if ($validator->fails() ) {
-			return Redirect::to('user')->withInput()->withErrors($validator);
-
-		}
-
-		//////////////////////////////////////////////////////////////
-
-
-		// use the factory to create a Faker\Generator instance
-		$faker = Faker\Factory::create();
 		
 
-		for($i = 0; $i < $userNum; $i++) {
-		    echo '<p>'.$faker->name.'</p>';  
-		    if (($userEmail)!=NULL){
-		      	echo '<p>'.$faker->email.'</p>'; 
-		    }
-			if (($userAddress)!=NULL){
-		      	echo '<p>'.$faker->address.'</p>'; 
-		    }		   
-		    echo '<br>';
-		}
+		/////////////////////////////////////////////////////////////////
+		//dealing with remeber me
 
+
+		//store in database
+
+	    $user = new User();
+        $user->lastName    = $registerData['lastName'];
+        $user->firstName    = $registerData['firstName'];
+        $user->username    = $registerData['userName'];
+        $user->email    = $registerData['inputEmail3'];
+        $user->password = Hash::make($registerData['inputPassword3']);
+        $user->ip_address	=Request::getClientIP();
+
+
+
+        # Try to add the user 
+        try {
+            $user->save();
+        }
+        # Fail
+        catch (Exception $e) {
+            return Redirect::to('/registerForm')->with('flash_message', 'Sign up failed; please try again.')->withInput();
+        }
+
+        # Log the user in
+        Auth::login($user);
+
+        return Redirect::to('/')->with('flash_message', 'Welcome!');
 	}
 
 
+	public function debug() {
+
+		return View::make('debug');
+	}
+
 }
+
+
+

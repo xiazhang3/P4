@@ -18,7 +18,7 @@ $(document).ready(function(){
 			userName: { required: true,  minlength: 2},
 			inputEmail3: { required: true, email: true},
 			inputPassword3: { required: true,  minlength: 6},
-			inputPassword3conf: { equalTo: "inputPassword3"}
+			inputPassword3_confirmation: { equalTo: "#inputPassword3"}
 		}
 	});
 });
@@ -34,13 +34,15 @@ $(document).ready(function(){
 	<br>
 	<br>
 
-	<form class="form-horizontal" role="form" id = "register_form">
+	{{ Form::open(array('url' => 'registerForm', 'id' => 'register_form', 'role' => 'form', 'class' => 'form-horizontal')) }}
 
 	  <div class="form-group">
 	    <label for="lastName" class="col-sm-2 control-label">Last Name</label>
 	    <div class="col-sm-8">
 	      <input type="text" class="form-control" name = "lastName" placeholder="Smith">
 	    </div>
+	    <span class="help-block errors"> {{ $errors->first('lastName') }} </span>
+	  
 	  </div>
 
 	  <div class="form-group">
@@ -48,6 +50,8 @@ $(document).ready(function(){
 	    <div class="col-sm-8">
 	      <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Amy">
 	    </div>
+	   	<span class="help-block errors"> {{ $errors->first('firstName') }} </span>
+
 	  </div>
 
 	   <div class="form-group">
@@ -55,13 +59,17 @@ $(document).ready(function(){
 	    <div class="col-sm-8">
 	      <input type="text" class="form-control" id="userName" name="userName" placeholder="Amy123Smith">
 	    </div>
+	    <span class="help-block errors"> {{ $errors->first('userName') }} </span>
+
 	  </div>
 
 	  <div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 	    <div class="col-sm-8">
-	      <input type="email" class="form-control" id="inputEmail3" name = "inputEmail3"placeholder="example@example.com">
+	      <input type="email" class="form-control" id="inputEmail3" name = "inputEmail3"placeholder="example@example.com">	
 	    </div>
+	    <span class="help-block errors"> {{ $errors->first('inputEmail3') }} </span>
+
 	  </div>
 
 
@@ -70,19 +78,23 @@ $(document).ready(function(){
 	    <div class="col-sm-8">
 	      <input type="password" class="form-control" id="inputPassword3" name="inputPassword3" placeholder="Password">
 	    </div>
+	    <span class="help-block errors"> {{ $errors->first('inputPassword3') }} </span>
+
 	  </div>
 	    <div class="form-group">
 	    <label for="inputPassword3conf" class="col-sm-2 control-label">Verify Password</label>
 	    <div class="col-sm-8">
-	      <input type="password" class="form-control" id="inputPassword3conf" name="inputPassword3conf" placeholder="Password">
+	      <input type="password" class="form-control" id="inputPassword3_confirmation" name="inputPassword3_confirmation" placeholder="Password">
 	    </div>
+	    <span class="help-block errors"> {{ $errors->first('inputPassword3_confirmation') }} </span>
+
 	  </div>
 
 	  <div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
 	      <div class="checkbox">
 	        <label>
-	          <input type="checkbox"> Remember me
+	          <input id='remember_me' name='remember_me' type="checkbox"> Remember me
 	        </label>
 	      </div>
 	    </div>
@@ -93,9 +105,10 @@ $(document).ready(function(){
 	    <div class="col-sm-offset-2 col-sm-10">
 	      <div class="checkbox">
 	        <label>
-	          <input type="checkbox"> I have read the <a href = "#">Subscriber Agreement &amp; Terms of Use</a>
+	          <input type="checkbox" id='terms' name='terms'> I have read the <a href = "#">Subscriber Agreement &amp; Terms of Use</a>
 	        </label>
 	      </div>
+	      <span class="help-block errors"> {{ $errors->first('terms') }} </span>
 	    </div>
 	  </div>
 
@@ -105,15 +118,16 @@ $(document).ready(function(){
 	    </div>
 	  </div>
 
-
+<!--
 	  <ul class = 'errors'>
 			@foreach ($errors->get('num_user') as $message)
 				<li> {{ $message }} </li>
 			@endforeach
 	  </ul> 
+-->
 
 
-	</form>
+	{{ Form:: close() }}
 
 </div><!--container-->
 

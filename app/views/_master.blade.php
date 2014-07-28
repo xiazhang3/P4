@@ -19,11 +19,15 @@
 </head>
 
 <body>
-	
+			
 
 			<?php require(app_path().'/views/component/navTop.php') ?>
 
 			@yield('content')
+
+			@if(Session::get('flash_message'))
+			    <div class='flash-message'>{{ Session::get('flash_message') }}</div>
+		    @endif
 	
 		
 

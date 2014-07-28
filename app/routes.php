@@ -13,9 +13,30 @@
 
 Route::get('/', 'OrgController@showIndex');
 Route::get('registerForm', 'OrgController@getCreateRegisterForm');
-Route::post('paragraph', 'OrgController@postCreateParagraph');
+Route::post('registerForm', 'OrgController@postRegisterForm');
 
 Route::get('user', 'OrgController@getCreateUser');
 Route::post('user', 'OrgController@postCreateUser');
+
+//for debug, will comment out for production
+Route::get('debug', 'OrgController@debug');
+
+Route::get('crud', function() {
+
+	# Instantiate the book model
+	$user = new User();
+        $user->lastName    = 'a';
+        $user->firstName    = 'b';
+        $user->username    = 'd';
+        $user->email    = 'x@12.com';
+        $user->password = Hash::make('123456');
+        $user->ip_address	='127.0.0.0';
+
+	# Magic: Eloquent
+	$user->save();
+
+	return "Added a new row";
+
+});
 
 
