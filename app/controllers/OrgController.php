@@ -52,7 +52,8 @@ class OrgController extends BaseController {
 		$validator = Validator::make($registerData, $rules, $message);
 
 		if ($validator->fails() ) {
-			return Redirect::to('registerForm')->withInput()->withErrors($validator);
+			//withInput does not work
+			return Redirect::to('registerForm')->withInput(Input::except('password'))->withErrors($validator);
 
 		}
 		
