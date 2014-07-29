@@ -5,10 +5,13 @@ class OrgController extends BaseController {
 	public function __construct() {
 
         $this->beforeFilter('guest', array('only' =>
-                            array('getRegisterForm')));//add filter to register form
+                            array('getCreateRegisterForm', 'getCreateLogin')));//add filter to register form
    
 		$this->beforeFilter('csrf', array('only' =>
-                            array('postRegisterForm')));
+                            array('postRegisterForm', 'postLogin')));
+
+		$this->beforeFilter('auth', array('only' =>
+                            array('getRecLettOrg')));
 
     }
 
@@ -27,7 +30,9 @@ class OrgController extends BaseController {
 
 		//validate inputs
 		//remove white space of the inputs
-		$registerData = array_map('trim', Input::all());
+		$input = Input::all();
+
+		$registerData = array_map('trim', $input);
 
 		//careful no space should be between 'unique:users,email' otherwise column not found
 		$rules = array(
@@ -53,13 +58,13 @@ class OrgController extends BaseController {
 
 		if ($validator->fails() ) {
 			//withInput does not work
-			return Redirect::to('registerForm')->withInput(Input::except('password'))->withErrors($validator);
+			return Redirect::to('registerForm')->withInput(Input::except('inputPassword3'))->withErrors($validator);
 
 		}
 		
 
 		/////////////////////////////////////////////////////////////////
-		//dealing with remeber me
+		
 
 
 		//store in database
@@ -71,8 +76,16 @@ class OrgController extends BaseController {
         $user->email    = $registerData['inputEmail3'];
         $user->password = Hash::make($registerData['inputPassword3']);
         $user->ip_address	=Request::getClientIP();
+        
+        //dealing with remeber me
+        /*
+        if(array_key_exists('remember_me', $registerData)) {
+	        $user->remember_token = '1';
+	    } else {
+	        $user->remember_token = '0';
 
-
+	    }
+		*/
 
         # Try to add the user 
         try {
@@ -80,7 +93,7 @@ class OrgController extends BaseController {
         }
         # Fail
         catch (Exception $e) {
-            return Redirect::to('/registerForm')->with('flash_message', 'Sign up failed; please try again.')->withInput();
+            return Redirect::to('/registerForm')->withInput(Input::except('inputPassword3'))->with('flash_message', 'Sign up failed; please try again.');
         }
 
         # Log the user in
@@ -90,12 +103,61 @@ class OrgController extends BaseController {
 	}
 
 
+	public function getCreateLogin() {
+		return View::make('login');
+	}
+
+	public function postLogin(){
+
+		//note that the database names and form names are different
+		$EmailCredential = Input::get('inputEmail3');
+		$passWordCredential = Input::get('inputPassword3');
+
+		//handle remember me
+		if (Input::has('remember_me')){
+			$remember = true;
+		} else {
+			$remember = false;
+		}
+
+
+        if (Auth::attempt(array('email' => $EmailCredential, 'password' => $passWordCredential) , $remember)) {
+            return Redirect::intended('/')->with('flash_message', 'Welcome Back!');
+        }
+        else {
+            return Redirect::to('login')->withInput(Input::except('inputPassword3'))->with('flash_message', 'Log in failed; please try again.');
+        }
+
+	}
+
+
+	public function getLogout() {
+
+		Auth::logout();
+
+    	# Send them to the homepage
+    	return Redirect::to('/');
+	}
+
+
+	public function getRecLettOrg(){
+		return View::make('recLett');
+	}
+
+	public function postRecLettOrg() {
+		//handle the form
+	}
+
+
 	public function debug() {
 
 		return View::make('debug');
 	}
 
 }
+
+
+
 
 
 

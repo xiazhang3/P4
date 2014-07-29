@@ -18,6 +18,18 @@ Route::post('registerForm', 'OrgController@postRegisterForm');
 Route::get('user', 'OrgController@getCreateUser');
 Route::post('user', 'OrgController@postCreateUser');
 
+Route::get('login', 'OrgController@getCreateLogin');
+Route::post('login', 'OrgController@postLogin');
+
+Route::get('logout', 'OrgController@getLogout');
+
+
+Route::get('recLett', 'OrgController@getRecLettOrg');
+Route::post('recLett', 'OrgController@postRecLettOrg');
+
+
+
+
 //for debug, will comment out for production
 Route::get('debug', 'OrgController@debug');
 

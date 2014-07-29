@@ -79,7 +79,6 @@ $(document).ready(function(){
 	      <input type="password" class="form-control" id="inputPassword3" name="inputPassword3" placeholder="Password">
 	    </div>
 	    <span class="help-block errors"> {{ $errors->first('inputPassword3') }} </span>
-
 	  </div>
 	    <div class="form-group">
 	    <label for="inputPassword3conf" class="col-sm-2 control-label">Verify Password</label>
@@ -118,13 +117,6 @@ $(document).ready(function(){
 	    </div>
 	  </div>
 
-<!--
-	  <ul class = 'errors'>
-			@foreach ($errors->get('num_user') as $message)
-				<li> {{ $message }} </li>
-			@endforeach
-	  </ul> 
--->
 
 
 	{{ Form:: close() }}

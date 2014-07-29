@@ -11,6 +11,7 @@ Project 4: Application Organizer
 
 <div class = 'container'>
 	<div class = 'row'>
+
 		<!--be careful with the path-->
 		<?php require(app_path().'/views/component/carousel.blade.php') ?>
 
