@@ -12,7 +12,7 @@
             <div class="carousel-caption">
               <h1>Recommendation Letter Organizer</h1>
               <p>Track request for recommendation letters, information of letter recipients, and more</p>
-              <p><a class="btn btn-lg btn-warning" href="/registerForm" role="button">Try Now For Free</a></p>
+              <p><a class="btn btn-lg btn-warning" href="/register_form" role="button">Try Now For Free</a></p>
             </div>
           </div>
         </div>

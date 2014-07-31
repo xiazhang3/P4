@@ -2,7 +2,7 @@
 
 
 @section('title')
-Project 4: Recommendation Letter Organizer
+Recommendation Letter Organizer
 @stop
 
 @section('content')
@@ -12,62 +12,100 @@ Project 4: Recommendation Letter Organizer
 	<br>
 	<br>
 
-
-	{{ Form::open(array('url' => 'recLett', 'id' => 'recLett', 'role' => 'form', 'class' => 'form-horizontal', 'enctype'=>'multipart/form-data')) }}
+	{{ Form::open(array('url' => 'rec-lett-org', 'id' => 'recLett', 'role' => 'form', 'class' => 'form-horizontal', 'files' => true)) }}
 
 	<div class="form-group">
-	    <label for="recipient_fistname" class="col-sm-2 control-label">Recipient's First Name</label>
+		{{Form::label('recipient_lastname', "Recipient's Last Name", array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	      <input type="text" class="form-control" id="recipient_firstname" name = "recipient_firstname" placeholder="Amy">	
+	    {{ Form::text('recipient_lastname', '', array('class' => 'form-control', 'placeholder'=>'Amy')) }}
 	    </div>
-	</div>
-	<div class="form-group">
-	    <label for="recipient_lastname" class="col-sm-2 control-label">Recipient's Last Name</label>
-	    <div class="col-sm-8">
-	      <input type="text" class="form-control" id="recipient_lastname" name = "recipient_lastname" placeholder="Smith">	
-	    </div>
+	    <span class="col-sm-offset-2 col-sm-10  help-block errors"> {{ $errors->first('recipient_lastname') }} </span>
 	</div>
 
 	<div class="form-group">
-	    <label for="inputEmail3" class="col-sm-2 control-label">Recipient's Email</label>
+	    {{Form::label('recipient_firstname', "Recipient's First Name", array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	      <input type="email" class="form-control" id="inputEmail3" name="inputEmail3" placeholder="example@example.com">
+	    {{ Form::text('recipient_firstname', '', array('class' => 'form-control', 'placeholder'=>'Smith')) }}	
 	    </div>
+	    <span class="col-sm-offset-2 col-sm-10  help-block errors"> {{ $errors->first('recipient_firstname') }} </span>
 	</div>
+
+	  <div class="form-group">
+	    {{Form::label('inputEmail3', "Recipient's Email", array('class'=> 'col-sm-2 control-label')) }}
+	    <div class="col-sm-8">
+	    {{ Form::email('inputEmail3', '', array('class' => 'form-control', 'placeholder'=>'example@example.com')) }}
+	    </div>
+	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('inputEmail3') }} </span>
+
+	  </div>
 
 
 	<!---mimes type for files-->
 	<div class="form-group">
-	    <label for="inputFile" class="col-sm-2 control-label">Recipient's Email</label>
+		{{Form::label('inputCV', "Recipient's CV", array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	      <input type="file" class="form-control" id="inputFile" name="inputFile" accept="application/pdf,application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+	        {{ Form::file('inputCV', '', array('class' => 'form-control', 'accept'=>"application/pdf,application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document")) }}
+	    </div>
+	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('inputCV') }} </span>
+	</div>
+
+	<div class="form-group">
+		{{Form::label('info', "Recipient's Info", array('class'=> 'col-sm-2 control-label')) }}
+	    <div class="col-sm-8">
+	    {{ Form::textarea('info', '', array('class' => 'form-control', 'placeholder'=>'A quick learner', 'rows'=> '5')) }}
 	    </div>
 	</div>
 
 	<div class="form-group">
-	    <label for="info" class="col-sm-2 control-label">Recipient's Info</label>
+		{{Form::label('job_program', "Job/Program Name", array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	      <textarea rows="5" class="form-control" id="info" name="info" placeholder="A quick learner"></textarea>
+	    {{ Form::text('job_program', '', array('class' => 'form-control', 'placeholder'=>'Job or Program Name')) }}
 	    </div>
+	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('job_program') }} </span>
 	</div>
 
+	<div class="form-group">
+		{{Form::label('description', "Job/Program Description", array('class'=> 'col-sm-2 control-label')) }}
+	    <div class="col-sm-8">
+	    {{ Form::textarea('description', '', array('class' => 'form-control', 'placeholder'=>'Job or Program Description', 'rows'=>'5')) }}
+	    </div>
+	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('description') }} </span>	
+	</div>
 
+		<!--dueDate -->
+	<div class="form-group">
+		{{Form::label('dueDate', "Application Due Date", array('class'=> 'col-sm-2 control-label')) }}
+	    <div class="col-sm-8">
+	    {{ Form::text('dueDate', '', array('class' => 'form-control', 'placeholder'=>'YYYY/MM/DD')) }}
+	    </div>
+	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('dueDate') }} </span>
+	</div>
+		
+
+		<!--alertDays -->
+
+	<div class="form-group">
+		{{Form::label('alertDate', "Aler Me On", array('class'=> 'col-sm-2 control-label')) }}
+	    <div class="col-sm-8">
+	    {{ Form::text('alertDate', '', array('class' => 'form-control', 'placeholder'=>'YYYY/MM/DD')) }}
+	    </div>
+	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('alertDate') }} </span>
+	</div>
+
+		<div class="form-group">
+		{{Form::label('recommendation_letter', "Recommendation Letter", array('class'=> 'col-sm-2 control-label')) }}
+	    <div class="col-sm-8">
+    	 {{ Form::file('recommendation_letter', '', array('class' => 'form-control', 'accept'=>"application/pdf,application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document")) }}
+	    </div>
+	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('recommendation_letter') }} </span>
+	</div>
 
 	<div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
-	      <div class="checkbox">
-	        <label>
-	          <input id='remember_me' name='remember_me' type="checkbox"> Remember me
-	        </label>
-	      </div>
-	    </div>
-	  </div>
-
-	<div class="form-group">
-	    <div class="col-sm-offset-2 col-sm-10">
-	      <button type="submit" class="btn btn-success">Login</button>
+	      <button type="submit" class="btn btn-success">Save</button>
 	    </div>
 	</div>
+
 
 	{{ Form:: close() }}
 

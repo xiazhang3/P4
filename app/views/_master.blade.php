@@ -30,6 +30,14 @@
 
 			@yield('content')
 
+			<div class="col-sm-offset-3 col-sm-9">
+
+				@if(Session::get('flash_message'))
+				    <div class='flash-message'>{{ Session::get('flash_message') }} </div>
+			    @endif
+
+			</div>
+
 
 	
 		

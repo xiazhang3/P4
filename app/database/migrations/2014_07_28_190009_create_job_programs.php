@@ -21,8 +21,14 @@ class CreateJobPrograms extends Migration {
     		    $table->string('job_program_name');
     		    $table->text('description');
     		    $table->date('due_date');
-    		    $table->integer('alert_days');
-    		    $table->string('recomendation_letter');
+    		    $table->date('alert_date');
+
+    		    //file related
+    		    $table->string('rl_id');
+    		    $table->string('rl_name');
+    		    $table->string('rl_size');
+    		    $table->string('rl_type');
+    		    $table->string('rl_path');
 
     		    $table->timestamps();
 

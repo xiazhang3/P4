@@ -2,7 +2,7 @@
 
 
 @section('title')
-Project 4: Register
+Register
 @stop
 
 @section('script')
@@ -34,39 +34,39 @@ $(document).ready(function(){
 	<br>
 	<br>
 
-	{{ Form::open(array('url' => 'registerForm', 'id' => 'register_form', 'role' => 'form', 'class' => 'form-horizontal')) }}
+	{{ Form::open(array('url' => 'register_form', 'id' => 'register_form', 'role' => 'form', 'class' => 'form-horizontal')) }}
 
 	  <div class="form-group">
-	    <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+	  	{{Form::label('lastName', 'Last Name', array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	      <input type="text" class="form-control" name = "lastName" placeholder="Smith">
+	    {{ Form::text('lastName', '', array('class' => 'form-control', 'placeholder'=>'Smith')) }}
 	    </div>
 	    <span class="help-block errors"> {{ $errors->first('lastName') }} </span>
 	  
 	  </div>
 
 	  <div class="form-group">
-	    <label for="firstName" class="col-sm-2 control-label">First Name</label>
+	    {{Form::label('fisrtName', 'First Name', array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	      <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Amy">
+	    {{ Form::text('firstName', '', array('class' => 'form-control', 'placeholder'=>'Amy')) }}
 	    </div>
 	   	<span class="help-block errors"> {{ $errors->first('firstName') }} </span>
 
 	  </div>
 
 	   <div class="form-group">
-	    <label for="userName" class="col-sm-2 control-label">Username</label>
+	   	{{Form::label('userName', 'Username', array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	      <input type="text" class="form-control" id="userName" name="userName" placeholder="Amy123Smith">
+	    {{ Form::text('userName', '', array('class' => 'form-control', 'placeholder'=>'Amy123Smith')) }}
 	    </div>
 	    <span class="help-block errors"> {{ $errors->first('userName') }} </span>
 
 	  </div>
 
 	  <div class="form-group">
-	    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+	    {{Form::label('inputEmail3', 'Email', array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	      <input type="email" class="form-control" id="inputEmail3" name = "inputEmail3"placeholder="example@example.com">	
+	    {{ Form::email('inputEmail3', '', array('class' => 'form-control', 'placeholder'=>'example@example.com')) }}
 	    </div>
 	    <span class="help-block errors"> {{ $errors->first('inputEmail3') }} </span>
 
@@ -74,30 +74,31 @@ $(document).ready(function(){
 
 
 	  <div class="form-group">
-	    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+	    {{Form::label('inputPassword3', 'Password', array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	      <input type="password" class="form-control" id="inputPassword3" name="inputPassword3" placeholder="Password">
+	      <input type="password" class="form-control" id="inputPassword3" name="inputPassword3" placeholder="at least 6 characters or digits">
 	    </div>
 	    <span class="help-block errors"> {{ $errors->first('inputPassword3') }} </span>
 	  </div>
 	    <div class="form-group">
-	    <label for="inputPassword3conf" class="col-sm-2 control-label">Verify Password</label>
+	    {{Form::label('inputPassword3_confirmation', 'Verify Password', array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	      <input type="password" class="form-control" id="inputPassword3_confirmation" name="inputPassword3_confirmation" placeholder="Password">
+	      <input type="password" class="form-control" id="inputPassword3_confirmation" name="inputPassword3_confirmation" placeholder="Put the same Password">
 	    </div>
 	    <span class="help-block errors"> {{ $errors->first('inputPassword3_confirmation') }} </span>
 
 	  </div>
 
-	  <div class="form-group">
+	<div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
 	      <div class="checkbox">
 	        <label>
-	          <input id='remember_me' name='remember_me' type="checkbox"> Remember me
+	           {{ Form::checkbox('remember_me', '1', true) }} Remember me
 	        </label>
+	        
 	      </div>
 	    </div>
-	  </div>
+	</div>
 
 
 	  <div class="form-group">
@@ -113,7 +114,7 @@ $(document).ready(function(){
 
 	  <div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
-	      <button type="submit" class="btn btn-primary">Sign up</button>
+	      <button type="submit" class="btn btn-info">Sign up</button>
 	    </div>
 	  </div>
 
@@ -122,8 +123,5 @@ $(document).ready(function(){
 	{{ Form:: close() }}
 
 </div><!--container-->
-
-	
-
 		
 @stop

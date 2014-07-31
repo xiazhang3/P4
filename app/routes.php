@@ -12,26 +12,24 @@
 */
 
 Route::get('/', 'OrgController@showIndex');
-Route::get('registerForm', 'OrgController@getCreateRegisterForm');
-Route::post('registerForm', 'OrgController@postRegisterForm');
+Route::get('register_form', 'RegisterFormController@getRegisterForm');
+Route::post('register_form', 'RegisterFormController@postRegisterForm');
 
-Route::get('user', 'OrgController@getCreateUser');
-Route::post('user', 'OrgController@postCreateUser');
+Route::get('login', 'LoginController@getLogin');
+Route::post('login', 'LoginController@postLogin');
 
-Route::get('login', 'OrgController@getCreateLogin');
-Route::post('login', 'OrgController@postLogin');
-
-Route::get('logout', 'OrgController@getLogout');
+Route::get('logout', 'LoginController@anyLogout');
 
 
-Route::get('recLett', 'OrgController@getRecLettOrg');
-Route::post('recLett', 'OrgController@postRecLettOrg');
+Route::get('rec-lett-org', 'RecLettOrgController@getRecLettOrg');
+Route::post('rec-lett-org', 'RecLettOrgController@postRecLettOrg');
 
+Route::get('recipient', 'RecLettOrgController@getRecipient');
 
 
 
 //for debug, will comment out for production
-Route::get('debug', 'OrgController@debug');
+Route::get('debug', 'DebugController@debug');
 
 Route::get('crud', function() {
 

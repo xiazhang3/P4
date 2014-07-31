@@ -21,7 +21,13 @@ class CreateRecipients extends Migration {
 		    $table->string('firstname');
 		    $table->string('email');
 		    $table->text('info');
-		    $table->string('cv');
+
+		    //file related
+	        $table->string('cv_id');
+	        $table->string('cv_name');
+		    $table->string('cv_size');
+		    $table->string('cv_type');
+		    $table->string('cv_path');
 
 		    $table->timestamps();
 
