@@ -21,15 +21,28 @@ Route::post('login', 'LoginController@postLogin');
 Route::get('logout', 'LoginController@anyLogout');
 
 
-Route::get('rec-lett-org', 'RecLettOrgController@getRecLettOrg');
-Route::post('rec-lett-org', 'RecLettOrgController@postRecLettOrg');
+Route::get('rec-lett-org', 'RecLettOrgController@getCreateRecipient');
+Route::post('rec-lett-org', 'RecLettOrgController@postCreateRecipient');
 
-Route::get('recipient', 'RecLettOrgController@getRecipient');
+Route::get('recipient/{id?}', 'RecLettOrgController@getRecipient');
+Route::get('recipient_info/{id?}','RecLettOrgController@showRecipientInfo');
+
+Route::delete('recipient_delete/{id}', 'RecLettOrgController@destroyRecipient');
+
+
+Route::get('job_program/{id}', 'JobProgramController@getJobProgram');
+Route::post('job_program/{id}', 'JobProgramController@postJobProgram');
+Route::get('show_job_program/{recipient_id}/{job_id?}', 'JobProgramController@showJobProgram');
+Route::delete('job_program_delete/{recipient_id}/{job_id}', 'JobProgramController@destroyJobProgram');
+Route::get('job_program_edit/{id}', 'JobProgramController@getEditJobProgram');
+Route::post('job_program_edit/{id}', 'JobProgramController@postEditJobProgram');
+
 
 
 
 //for debug, will comment out for production
 Route::get('debug', 'DebugController@debug');
+
 
 Route::get('crud', function() {
 

@@ -21,3 +21,14 @@ in database $table->unique( array('email','name') );
 
 2)isolate form validation and handling of saving data into database 
 
+3) 404 Page 
+
+
+4) allow no RL file uploaded 
+
+5) date format
+
+
+6) constraint for adding multiple entries for the same job
+
+7)Forget password
