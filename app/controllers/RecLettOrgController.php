@@ -60,7 +60,7 @@ class RecLettOrgController extends BaseController {
 			'recipient_firstname' => array('alpha', 'required'),
 			'inputEmail3' => array('email', 'required'),
 			'inputCV' => array('max:300000', 'required'),
-			'info' => array('alpha_num', 'required'),
+			'info' => array('required'),
 		);
 
 		$message = array(
@@ -239,7 +239,7 @@ class RecLettOrgController extends BaseController {
 					'recipient_firstname' => array('alpha', 'required'),
 					'inputEmail3' => array('email', 'required'),
 					'inputCV' => array('max:30000', 'required'),
-					'info' => array('alpha_num', 'required'),
+					'info' => array('required'),
 				);
 
 				$message = array(
