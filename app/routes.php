@@ -52,7 +52,7 @@ Route::get('truncate', function() {
     DB::statement('TRUNCATE job_programs');
     DB::statement('TRUNCATE recipients');
     DB::statement('TRUNCATE users');
-}
+});
 
 Route::get('crud', function() {
 
