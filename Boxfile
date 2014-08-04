@@ -11,6 +11,9 @@ web1:
     - /app/storage/meta
     - /app/storage/sessions
     - /app/storage/views
+    - /app/storage/files/CV
+    - /app/storage/files/RL
+    
   document_root: public
   php_version: 5.4.14
   php_extensions:
@@ -21,7 +24,6 @@ web1:
   after_deploy:
     - "rm -f app/storage/cache/*"
     - "rm -f app/storage/views/*"
-    -"mkdir -p app/storage/files/CV"
-    -"mkdir -p app/storage/files/RL"
 
     - "php artisan migrate"
+

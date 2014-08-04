@@ -185,7 +185,7 @@ class JobProgramController extends BaseController {
 			'description' => array('required'),
 			'dueDate' => 'date_format:Y-m-d|date',
 			'alertDate' => 'date_format:Y-m-d|date',
-			'recommendation_letter' => 'max:300000|required'
+			'recommendation_letter' => 'max:30000|required'
 		);
 
 		$message = array(
@@ -207,7 +207,7 @@ class JobProgramController extends BaseController {
 			return Redirect::to('job_program/'.$recipient_id.'/'.$job_id)->withInput()->with('flash_message', 'Files not valid');
 		}else if ($filetypeRL!="application/pdf"&&$filetypeRL!="application/msword"&&$filetypeRL!="application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
 				return Redirect::to('job_program/'.$recipient_id.'/'.$job_id)->withInput()->with('flash_message', 'The input recommendation letter should be in pdf, doc, docx format');
-		} else if (filesize(Input::file('recommendation_letter')) > 300000){
+		} else if (filesize(Input::file('recommendation_letter')) > 30000){
 			return Redirect::to('job_program/'.$recipient_id.'/'.$job_id)->withInput()->with('flash_message', 'RL file too large');
 		}
 

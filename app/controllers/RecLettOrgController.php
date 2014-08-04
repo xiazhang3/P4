@@ -238,7 +238,7 @@ class RecLettOrgController extends BaseController {
 					'recipient_lastname' => array('alpha', 'required'),
 					'recipient_firstname' => array('alpha', 'required'),
 					'inputEmail3' => array('email', 'required'),
-					'inputCV' => array('max:300000', 'required'),
+					'inputCV' => array('max:30000', 'required'),
 					'info' => array('alpha_num', 'required'),
 				);
 
@@ -266,7 +266,7 @@ class RecLettOrgController extends BaseController {
 					return Redirect::to('edit_recipient/'.$recipient_id)->withInput()->with('flash_message', 'Files not valid');
 				}else if ($filetypeCV!="application/pdf"&&$filetypeCV!="application/msword"&&$filetypeCV!="application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
 						return Redirect::to('edit_recipient/'.$recipient_id)->withInput()->with('flash_message', 'The input CV file should be in pdf, doc, docx format');
-				} else if (filesize(Input::file('inputCV')) >300000){
+				} else if (filesize(Input::file('inputCV')) >30000){
 					return Redirect::to('edit_recipient/'.$recipient_id)->withInput()->with('flash_message', 'CV file too large');
 				}
 
