@@ -45,6 +45,10 @@ class CreateJobPrograms extends Migration {
 	public function down()
 	{
 		//
+		Schema::table('job_programs', function($table) {
+			$table->dropForeign('job_programs_recipient_id_foreign'); # table_fields_foreign
+		});
+
 		Schema::drop('job_programs');
 	}
 

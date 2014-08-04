@@ -44,6 +44,11 @@ class CreateRecipients extends Migration {
 	public function down()
 	{
 		//
+
+		Schema::table('recipients', function($table) {
+			$table->dropForeign('recipients_user_id_foreign'); # table_fields_foreign
+		});
+		
 		Schema::drop('recipients');
 	}
 
