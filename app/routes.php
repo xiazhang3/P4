@@ -42,10 +42,10 @@ Route::post('job_program_edit/{recipient_id}/{job_id}', 'JobProgramController@po
 
 
 ///////////////
-Not Allow the following in production 
+//Not Allow the following in production 
 //for debug, will comment out for production
 Route::get('debug', 'DebugController@debug');
-Route::get('/truncate', function() {
+Route::get('truncate', function() {
 
     # Clear the tables to a blank slate
     DB::statement('SET FOREIGN_KEY_CHECKS=0'); # Disable FK constraints so that all rows can be deleted, even if there's an associated FK
