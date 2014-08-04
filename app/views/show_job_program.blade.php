@@ -14,7 +14,9 @@ Recipient
 	<br>
 
 @if(count($job_programs) == 0)
-			<p>No matches found</p>
+			<div class='message'>
+				<p>No matches found</p>
+			</div>
 @endif
 
 
@@ -38,10 +40,14 @@ Recipient
 				<th>{{$job_program['job_program_name']}}</th>
 				<th>{{$job_program['description']}}</th>
 				<th>{{ $job_program['due_date'] }}</th>
-				<th>{{ $job_program['alert_date'] }}</th>			
+				<th>{{ $job_program['alert_date'] }}</th>	
+				<th>{{ Form::open(['method' => 'GET', 'url' => 'download_rl/'.$job_program['recipient_id'].'/'. $job_program['id'] ])  }}
+    	     	<button type="submit" class="btn btn-info">Download RL</button>
+{{ Form::close() }}</th>		
 				<th>{{ Form::open(['method' => 'GET', 'url' => 'job_program_edit/'.$job_program['recipient_id'].'/'. $job_program['id'] ])  }}
-    	      <button type="submit" class="btn btn-warning">Edit</button>
+    	     	<button type="submit" class="btn btn-warning">Edit</button>
 {{ Form::close() }}</th>
+
 				<th>{{ Form::open(['method' => 'DELETE', 'url' => 'job_program_delete/'.$job_program['recipient_id'].'/'. $job_program['id'] ]) }}
     <button type="submit" class="btn btn-danger">Delete</button>
 {{ Form::close() }}</th>

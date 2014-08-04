@@ -13,7 +13,7 @@
 
         <div class="navbar-collapse collapse navbar-right">
             <?php if(Auth::check()): ?>
-                <span class='text-warning ' id = "user_email"> <?php echo 'Hello, '.Auth::user()->username; ?></span>
+                <span class='text-warning' id="user_email"> <?php echo 'Hello, '.Auth::user()->username; ?></span>
 
                 <a href='/logout' role="button" class="btn  btn-warning">Log out</a>
             <?php else: ?>

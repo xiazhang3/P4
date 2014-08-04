@@ -339,4 +339,46 @@ class JobProgramController extends BaseController {
 
 	}
 
+
+			public function getDownloadRL($recipient_id, $job_id) {
+
+
+				$user_id = Auth::user()->id;
+
+				//check access
+				//need "" for $recipient_id otherwise, like a string '$recipient_di'
+				$this_recipient = Recipient::where('id', '=', "$recipient_id")->get()->toArray();
+
+				if(count($this_recipient) > 0) {
+		    		$user_id=$this_recipient[0]['user_id'];
+		    	} else {
+		    		$user_id = -1; //flag for nonavailable id 
+		    	}
+
+		    	if ($user_id != Auth::user()->id) {
+		    		return Redirect::to('show_job_program/'.$recipient_id)->with('flash_message', 'Access denied!');
+		    	} 
+
+
+
+				$RLfile=Job_program::where('id', '=', "$job_id")->where('recipient_id', '=', "$recipient_id")->get()->toArray();
+
+				//Note this is a nested array need $RLfile[0] to get the next level!!!!
+				if (count($RLfile) > 0 ) {
+					$RLpath = $RLfile[0]["rl_path"].'/'.$RLfile[0]["rl_id"];
+				} else {
+					return Redirect::to('show_job_program/'.$recipient_id)->with('flash_message','Unable to find RL');
+				}
+
+
+				try{
+					return Response::download($RLpath);
+				}
+				catch (Exception $e) {
+					return Redirect::to('show_job_program/'.$recipient_id)->with('flash_message', 'Unable to download RL files');
+				}
+
+
+			} 
+
 }

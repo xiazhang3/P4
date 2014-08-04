@@ -1,4 +1,26 @@
-/*navTop not working*/
+.message p {
+  color: #FF0000;
+
+}
+
+.flash-message p {
+  color: #FF0000;
+  text-align:center;
+}
+
+p {
+  font-family:"Times New Roman", Times, serif;
+  font-size:150%;
+}
+
+
+caption {
+
+  font-size:120%;
+  color:#009933;
+
+}
+
 #user_email {
   font-weight:bold;
   color:white;

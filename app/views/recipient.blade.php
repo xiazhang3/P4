@@ -32,7 +32,9 @@ $(document).ready(function(){
 	<br>
 
 @if(count($recipients) == 0)
+			<div class='message'>
 			<p>No matches found</p>
+			</div>
 @endif
 
 
@@ -55,7 +57,11 @@ $(document).ready(function(){
 				<th>{{ $recipient['created_at'] }}</th>
 
 				<th>{{ Form::open(['method' => 'GET', 'action' => ['RecLettOrgController@showRecipientInfo', $recipient['id']]]) }}
-    	      <button type="submit" class="btn btn-info">Detailed Info</button>
+    	      <button type="submit" class="btn btn-default">Detailed Info</button>
+{{ Form::close() }}</th>
+
+				<th>{{ Form::open(['method' => 'GET', 'action' => ['RecLettOrgController@downloadCV', $recipient['id']]]) }}
+    	      <button type="submit" class="btn btn-info">Download CV</button>
 {{ Form::close() }}</th>
 
 				<th>{{ Form::open(['method' => 'GET', 'action' => ['JobProgramController@showJobProgram', $recipient['id']]]) }}

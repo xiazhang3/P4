@@ -7,7 +7,7 @@
     </ol><!-- carousel-indicators -->
 
     <section class="carousel-inner">
-        <div class="active item"><img src="http://placekitten.com/1200/500 " alt="e">
+        <div class="active item"><img src="img/1.JPG" alt="e">
           <div class="container">
             <div class="carousel-caption">
               <h1>Recommendation Letter Organizer</h1>
@@ -17,11 +17,13 @@
           </div>
         </div>
 
-        <div class="item"><img src="http://placekitten.com/1200/600 " alt="">
+        <!-- test link http://placekitten.com/1200/600 -->
+
+        <div class="item"><img src="img/3.JPG" alt="">
           <div class="container">
             <div class="carousel-caption">
               <h1>Job/University Application Organizer</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p>This feature is under construction.</p>
               <p><a class="btn btn-lg btn-warning" href="#" role="button">Learn more</a></p>
             </div>
           </div>

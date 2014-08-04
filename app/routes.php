@@ -28,6 +28,7 @@ Route::get('recipient/{id?}', 'RecLettOrgController@getRecipient');
 Route::get('recipient_info/{id?}','RecLettOrgController@showRecipientInfo');
 Route::get('edit_recipient/{recipient_id}', 'RecLettOrgController@getEditRecipient');
 Route::post('edit_recipient/{recipient_id}', 'RecLettOrgController@postEditRecipient');
+Route::get('download_cv/{recipient_id}', 'RecLettOrgController@downloadCV');
 
 Route::delete('recipient_delete/{id}', 'RecLettOrgController@destroyRecipient');
 
@@ -38,7 +39,7 @@ Route::get('show_job_program/{recipient_id}/{job_id?}', 'JobProgramController@sh
 Route::delete('job_program_delete/{recipient_id}/{job_id}', 'JobProgramController@destroyJobProgram');
 Route::get('job_program_edit/{recipient_id}/{job_id}', 'JobProgramController@getEditJobProgram');
 Route::post('job_program_edit/{recipient_id}/{job_id}', 'JobProgramController@postEditJobProgram');
-
+Route::get('download_rl/{recipient_id}/{job_id}', 'JobProgramController@getDownloadRL');
 
 
 ///////////////

@@ -32,7 +32,9 @@ $(document).ready(function(){
 	<br>
 
 @if(count($recipients) == 0)
-			<p>No matches found</p>
+			<div class='message'>
+				<p>No matches found</p>
+			</div>
 @endif
 
 		@foreach($recipients as $recipient)

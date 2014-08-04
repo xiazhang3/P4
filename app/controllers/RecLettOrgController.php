@@ -350,6 +350,27 @@ class RecLettOrgController extends BaseController {
 
 		}
 
+
+		public function downloadCV($recipient_id) {
+			$user_id = Auth::user()->id;
+
+			$CVfile=Recipient::where('id', '=', "$recipient_id")->where('user_id', '=', "$user_id")->get()->toArray();
+
+			//Note this is a nested array need $RLfile[0] to get the next level!!!!
+			if (count($CVfile) > 0 ) {
+				$CVpath = $CVfile[0]["cv_path"].'/'.$CVfile[0]["cv_id"];
+			} else {
+				return Redirect::to('recipient')->with('flash_message','Unable to find CV');
+			}
+
+
+			try{
+				return Response::download($CVpath);
+			}
+			catch (Exception $e) {
+				return Redirect::to('recipient')->with('flash_message', 'Unable to download CV files');
+			}
+		}
 	
 
 
