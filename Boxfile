@@ -21,5 +21,8 @@ web1:
   after_deploy:
     - "rm -f app/storage/cache/*"
     - "rm -f app/storage/views/*"
-    
+    -"mkdir -p app/storage/files/CV"
+    -"mkdir -p app/storage/files/RL"
+    -"chmod 777 app/storage/files/*"
+
     - "php artisan migrate"
