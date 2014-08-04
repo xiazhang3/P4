@@ -32,3 +32,5 @@ in database $table->unique( array('email','name') );
 6) constraint for adding multiple entries for the same job
 
 7)Forget password
+
+8)Ajax validation for file upload

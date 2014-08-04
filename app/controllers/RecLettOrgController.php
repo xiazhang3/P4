@@ -96,7 +96,9 @@ class RecLettOrgController extends BaseController {
 //////////////////////////////////////////////////////////////
 		//save to the database
 		//recipient_database
-		$fileNameCV=uniqid().$fileCV->getClientOriginalName();
+		//replace " " with _ for file name
+		$fileCVOriName = str_replace(' ', '_', $fileCV->getClientOriginalName());
+		$fileNameCV=uniqid().$fileCVOriName;
 		
 
 		$recipient = new Recipient();
@@ -212,6 +214,122 @@ class RecLettOrgController extends BaseController {
 
 
 		}
+
+
+		public function getEditRecipient($recipient_id) {
+			$user_id = Auth::user()->id;
+			try{
+				$recipient = Recipient::where('user_id', '=', "$user_id")->findOrFail($recipient_id);
+			} catch(Exception $e) {
+				return Redirect::to('recipient')->with('flash_message', 'unable to find this recipient');
+			}
+
+			return View::make('recipient_edit')
+			->with('recipient', $recipient);
+		}
+
+		public function postEditRecipient($recipient_id) {
+
+				$input = Input::all();
+
+				$registerData = array_map('trim', $input);
+
+				$rules = array(
+					'recipient_lastname' => array('alpha', 'required'),
+					'recipient_firstname' => array('alpha', 'required'),
+					'inputEmail3' => array('email', 'required'),
+					'inputCV' => array('max:300000', 'required'),
+					'info' => array('alpha_num', 'required'),
+				);
+
+				$message = array(
+					'email' => 'Please provide valid email address',
+				);
+
+				$validator = Validator::make($registerData, $rules, $message);
+
+				if ($validator->fails() ) {
+					//withInput does not work
+					return Redirect::to('edit_recipient/'.$recipient_id)->withInput()->withErrors($validator);
+
+				}
+
+
+				$fileCV = Input::file('inputCV');
+				
+
+				$filetypeCV = $fileCV->getMimeType();
+			
+
+				//check file type and size
+				if(!$fileCV->isValid()){
+					return Redirect::to('edit_recipient/'.$recipient_id)->withInput()->with('flash_message', 'Files not valid');
+				}else if ($filetypeCV!="application/pdf"&&$filetypeCV!="application/msword"&&$filetypeCV!="application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+						return Redirect::to('edit_recipient/'.$recipient_id)->withInput()->with('flash_message', 'The input CV file should be in pdf, doc, docx format');
+				} else if (filesize(Input::file('inputCV')) >300000){
+					return Redirect::to('edit_recipient/'.$recipient_id)->withInput()->with('flash_message', 'CV file too large');
+				}
+
+
+		//////////////////////////////////////////////////////////////
+				//delete previous uploaded file
+				$user_id = Auth::user()->id;//check access
+				//has to use first(), otherwise an array will not save()
+				$recipient = Recipient::where('id', '=', "$recipient_id")->where('user_id', '=', "$user_id")->first();
+
+				//Note this is a nested array need $RLfile[0] to get the next level!!!!
+				if (count($recipient) > 0 ) {
+					$preCVpath = $recipient->cv_path.'/'.$recipient->cv_id;
+				} else {
+					return Redirect::to('edit_recipient/'.$recipient_id)->with('flash_message','Unable to find previous CV');
+				}
+
+
+				try{
+					if (File::exists($preCVpath)) {
+						File::delete($preCVpath);
+					}
+				}
+				catch (Exception $e) {
+					return Redirect::to('edit_recipient/'.$recipient_id)->with('flash_message', 'Unable to delete previous CV files');
+				}
+
+
+				//save to the database
+				//recipient_database
+				//replace " " with _ for file name
+				$fileCVOriName = str_replace(' ', '_', $fileCV->getClientOriginalName());
+				$fileNameCV=uniqid().$fileCVOriName;
+				
+				$recipient->user_id=$user_id; 
+				$recipient->lastname = $input['recipient_lastname'];
+				$recipient->firstname = $input['recipient_firstname'];
+				$recipient->email=$input['inputEmail3'];
+				$recipient->info=$input['info'];
+				$recipient->cv_id=$fileNameCV;
+				$recipient->cv_name=$fileCV->getClientOriginalName();
+				$recipient->cv_size=$fileCV->getSize();
+				$recipient->cv_type=$filetypeCV;
+				//move files
+				$destinationPath=storage_path().'/files/CV';
+				$fileCV->move($destinationPath, $fileNameCV);
+				$recipient->cv_path=$destinationPath;
+
+				
+				try {
+		            $recipient->save();
+
+		            //need to check!!///////////
+		            ///////////////////////////
+		            ///// change route to display info ()
+		            return Redirect::to('recipient')->with('flash_message', 'Success');
+		        }
+		        # Fail
+		        catch (Exception $e) {
+		            return Redirect::to('edit_recipient/'.$recipient_id)->withInput()->with('flash_message', 'Unable to save your input');
+		        }
+
+        }
 
 
 

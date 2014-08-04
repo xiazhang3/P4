@@ -2,7 +2,7 @@
 
 
 @section('title')
-Job/Program Register
+Edit Job/Program 
 @stop
 
 @section('content')
@@ -12,12 +12,12 @@ Job/Program Register
 	<br>
 	<br>
 
-	{{ Form::open(array('url' => 'job_program/'.$recipient_id, 'id' => 'job_program', 'role' => 'form', 'class' => 'form-horizontal', 'files' => true)) }}
+	{{ Form::open(array('url' => 'job_program_edit/'.$job_program['recipient_id'].'/'.$job_program['id'], 'id' => 'job_program_edit', 'role' => 'form', 'class' => 'form-horizontal', 'files' => true)) }}
 
 	<div class="form-group">
 		{{Form::label('job_program', "Job/Program Name", array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	    {{ Form::text('job_program', '', array('class' => 'form-control', 'placeholder'=>'Job or Program Name')) }}
+	    {{ Form::text('job_program', $job_program['job_program_name'], array('class' => 'form-control', 'placeholder'=>'Job or Program Name')) }}
 	    </div>
 	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('job_program') }} </span>
 	</div>
@@ -25,7 +25,7 @@ Job/Program Register
 	<div class="form-group">
 		{{Form::label('description', "Job/Program Description", array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	    {{ Form::textarea('description', '', array('class' => 'form-control', 'placeholder'=>'Job or Program Description', 'rows'=>'5')) }}
+	    {{ Form::textarea('description', $job_program['description'], array('class' => 'form-control', 'placeholder'=>'Job or Program Description', 'rows'=>'5')) }}
 	    </div>
 	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('description') }} </span>	
 	</div>
@@ -34,7 +34,7 @@ Job/Program Register
 	<div class="form-group">
 		{{Form::label('dueDate', "Application Due Date", array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	    {{ Form::text('dueDate', '', array('class' => 'form-control', 'placeholder'=>'YYYY/MM/DD')) }}
+	    {{ Form::text('dueDate', $job_program['due_date'], array('class' => 'form-control', 'placeholder'=>'YYYY/MM/DD')) }}
 	    </div>
 	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('dueDate') }} </span>
 	</div>
@@ -45,7 +45,7 @@ Job/Program Register
 	<div class="form-group">
 		{{Form::label('alertDate', "Alert Me On", array('class'=> 'col-sm-2 control-label')) }}
 	    <div class="col-sm-8">
-	    {{ Form::text('alertDate', '', array('class' => 'form-control', 'placeholder'=>'YYYY/MM/DD')) }}
+	    {{ Form::text('alertDate', $job_program['alert_date'], array('class' => 'form-control', 'placeholder'=>'YYYY/MM/DD')) }}
 	    </div>
 	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('alertDate') }} </span>
 	</div>

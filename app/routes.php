@@ -26,6 +26,8 @@ Route::post('rec-lett-org', 'RecLettOrgController@postCreateRecipient');
 
 Route::get('recipient/{id?}', 'RecLettOrgController@getRecipient');
 Route::get('recipient_info/{id?}','RecLettOrgController@showRecipientInfo');
+Route::get('edit_recipient/{recipient_id}', 'RecLettOrgController@getEditRecipient');
+Route::post('edit_recipient/{recipient_id}', 'RecLettOrgController@postEditRecipient');
 
 Route::delete('recipient_delete/{id}', 'RecLettOrgController@destroyRecipient');
 
@@ -34,8 +36,8 @@ Route::get('job_program/{id}', 'JobProgramController@getJobProgram');
 Route::post('job_program/{id}', 'JobProgramController@postJobProgram');
 Route::get('show_job_program/{recipient_id}/{job_id?}', 'JobProgramController@showJobProgram');
 Route::delete('job_program_delete/{recipient_id}/{job_id}', 'JobProgramController@destroyJobProgram');
-Route::get('job_program_edit/{id}', 'JobProgramController@getEditJobProgram');
-Route::post('job_program_edit/{id}', 'JobProgramController@postEditJobProgram');
+Route::get('job_program_edit/{recipient_id}/{job_id}', 'JobProgramController@getEditJobProgram');
+Route::post('job_program_edit/{recipient_id}/{job_id}', 'JobProgramController@postEditJobProgram');
 
 
 

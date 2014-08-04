@@ -53,11 +53,19 @@ $(document).ready(function(){
 			<tr>
 				<th><a href={{url('recipient_info/'.$recipient['id'])}}>{{$recipient['firstname']}} {{$recipient['lastname']}}</a></th>
 				<th>{{ $recipient['created_at'] }}</th>
+
+				<th>{{ Form::open(['method' => 'GET', 'action' => ['RecLettOrgController@showRecipientInfo', $recipient['id']]]) }}
+    	      <button type="submit" class="btn btn-info">Detailed Info</button>
+{{ Form::close() }}</th>
+
+				<th>{{ Form::open(['method' => 'GET', 'action' => ['JobProgramController@showJobProgram', $recipient['id']]]) }}
+    	      <button type="submit" class="btn btn-primary">Show Job/Program</button>
+{{ Form::close() }}</th>
 				
 				<th>{{ Form::open(['method' => 'GET', 'action' => ['JobProgramController@getJobProgram', $recipient['id']]]) }}
     	      <button type="submit" class="btn btn-warning">Add Job/Program</button>
 {{ Form::close() }}</th>
-				<th>{{ Form::open(['method' => 'GET', 'action' => ['RecLettOrgController@destroyRecipient', $recipient['id']]]) }}
+				<th>{{ Form::open(['method' => 'GET', 'action' => ['RecLettOrgController@getEditRecipient', $recipient['id']]]) }}
     	      <button type="submit" class="btn btn-success">Edit</button>
 {{ Form::close() }}</th>
 				<th>{{ Form::open(['method' => 'DELETE', 'action' => ['RecLettOrgController@destroyRecipient', $recipient['id']]]) }}

@@ -5,8 +5,8 @@
         <div class="navbar-header">
            <ul class="nav nav-pills pull-left">
               <li class="active"><a href="/">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href=<?php echo url('rec-lett-org'); ?> >Add Recipient</a></li>
+              <li><a href=<?php echo url('recipient'); ?> >Show Recipients</a></li>
           </ul>
         </div>
 

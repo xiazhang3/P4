@@ -39,7 +39,7 @@ Recipient
 				<th>{{$job_program['description']}}</th>
 				<th>{{ $job_program['due_date'] }}</th>
 				<th>{{ $job_program['alert_date'] }}</th>			
-				<th>{{ Form::open(['method' => 'GET', 'action' => ['JobProgramController@getEditJobProgram', $job_program['id']]]) }}
+				<th>{{ Form::open(['method' => 'GET', 'url' => 'job_program_edit/'.$job_program['recipient_id'].'/'. $job_program['id'] ])  }}
     	      <button type="submit" class="btn btn-warning">Edit</button>
 {{ Form::close() }}</th>
 				<th>{{ Form::open(['method' => 'DELETE', 'url' => 'job_program_delete/'.$job_program['recipient_id'].'/'. $job_program['id'] ]) }}
