@@ -42,6 +42,8 @@ Route::post('job_program_edit/{recipient_id}/{job_id}', 'JobProgramController@po
 Route::get('download_rl/{recipient_id}/{job_id}', 'JobProgramController@getDownloadRL');
 
 
+
+
 ///////////////
 //Not Allow the following in production 
 //for debug, will comment out for production
@@ -75,7 +77,7 @@ Route::get('crud', function() {
         $user->username    = 'y';
         $user->email    = 'x@122.com';
         $user->password = Hash::make('123456');
-        $user->ip_address       ='127.0.0.0';
+        $user->ip_address  ='127.0.0.0';
 
 	# Magic: Eloquent
 	$user->save();
@@ -83,5 +85,7 @@ Route::get('crud', function() {
 	return "Added two new rows";
 
 });
+
+
 
 

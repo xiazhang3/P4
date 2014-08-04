@@ -15,17 +15,11 @@ class JobProgramController extends BaseController {
     	//check whether user has access to this recipient
 		$user_id = Auth::user()->id;
 
-		$this_recipient = Recipient::where('id', '=', "$recipient_id")->get()->toArray();
+		//use class AccessValiate
+		$access = New AccessValidate($recipient_id);
+		$access_result = $access->isAccessAllowed($recipient_id);
 
-		if(count($this_recipient) > 0) {
-	    	$user_id=$this_recipient[0]['user_id'];
-	    	$this_recipient_name = $this_recipient[0]['firstname']." ".$this_recipient[0]['lastname'];
-
-	    	} else {
-	    		$user_id = -1; //flag for nonavailable id 
-	    	}
-
-	    	if ($user_id != Auth::user()->id) {
+	    if ($access_result == "false") {
 	    		return Redirect::to('recipient')->with('flash_message', 'Access denied!');
 	    } 
 
@@ -40,7 +34,7 @@ class JobProgramController extends BaseController {
 
 	    }
 
-		return View::make('show_job_program')->with('job_programs', $job_programs)->with('this_recipient_name', $this_recipient_name);
+		return View::make('show_job_program')->with('job_programs', $job_programs)->with('this_recipient_name', $access_result);
     }
 
     public function getJobProgram($recipient_id) {
