@@ -33,6 +33,7 @@ Recipient
 				<th></th>
 				<th></th>
 				<th></th>
+			</tr>
 	</thead>
 	<tbody>
 		@foreach($job_programs as $job_program)
@@ -51,6 +52,7 @@ Recipient
 				<th>{{ Form::open(['method' => 'DELETE', 'url' => 'job_program_delete/'.$job_program['recipient_id'].'/'. $job_program['id'] ]) }}
     <button type="submit" class="btn btn-danger">Delete</button>
 {{ Form::close() }}</th>
+			</tr>
 				
 		@endforeach
 	</tbody>

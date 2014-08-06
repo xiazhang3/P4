@@ -49,6 +49,7 @@ $(document).ready(function(){
 				<th></th>
 				<th></th>
 				<th></th>
+			</tr>
 	</thead>
 	<tbody>
 		@foreach($recipients as $recipient)
@@ -77,6 +78,8 @@ $(document).ready(function(){
 				<th>{{ Form::open(['method' => 'DELETE', 'action' => ['RecLettOrgController@destroyRecipient', $recipient['id']]]) }}
     <button type="submit" class="btn btn-danger">Delete</button>
 {{ Form::close() }}</th>
+				
+				</tr>
 
 
 				

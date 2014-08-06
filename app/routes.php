@@ -43,7 +43,7 @@ Route::get('download_rl/{recipient_id}/{job_id}', 'JobProgramController@getDownl
 
 
 
-
+/*
 ///////////////
 //Not Allow the following in production 
 //for debug, will comment out for production
@@ -86,6 +86,6 @@ Route::get('crud', function() {
 
 });
 
-
+*/
 
 
