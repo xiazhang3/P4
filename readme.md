@@ -8,6 +8,12 @@ http://graphichive.net/Free/Graphics/Download/4383/
 ##tablersorter
 http://tablesorter.com/
 
+##Things may go wrong
+The file size should not exceed 30000 bytes. Sometimes the flash error messages did not show up on the live server. 
+
+The email alert function does not work properly. Somehow the Mail::later() method did not delay for sending the email. This action should also be taken care of when the alert date is updated.
+A queueing system may be needed.
+
 
 
 ## Laravel PHP Framework

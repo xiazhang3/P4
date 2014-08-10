@@ -122,12 +122,28 @@ class JobProgramController extends BaseController {
 		$job_program->rl_path=$destinationPathRL;
 
 
+
+
+            
 		
 		try {
-            $job_program->save();
+
+			$job_program->save();
+
+           //send email
+            $user=User::find(Auth::user()->id);
+
+            $laterSec = strtotime($job_program->alert_date)-time();
+
+	    	Mail::later($laterSec, 'emails.alert', array('due_date' => $job_program->due_date), function($message) use ($user){
+			    $message->to($user->email, $user->firstname." ".$user->lastname);
+			    $message->from('noreply@applicationorganizer.pagodabox.com', 'Do Not Reply');
+			    $message->subject('Alert! Due date is coming.');
+			});
            
  			$job_id=$job_program->id;
             return Redirect::to('show_job_program/'.$recipient_id.'/'.$job_id);
+
         }
         # Fail
         catch (Exception $e) {
@@ -260,6 +276,20 @@ class JobProgramController extends BaseController {
 		
 		try {
             $job_program->save();
+
+
+            //send alert email
+            $user=User::find(Auth::user()->id);
+
+            $laterSec = strtotime($job_program->alert_date)-time();
+
+	    	Mail::later($laterSec, 'emails.alert', array('due_date' => $job_program->due_date), function($message) use ($user){
+			    $message->to($user->email, $user->firstname." ".$user->lastname);
+			    $message->from('noreply@applicationorganizer.pagodabox.com', 'Do Not Reply');
+			    $message->subject('Alert! Due date is coming.');
+			});
+
+			
            
  			$job_id=$job_program->id;
             return Redirect::to('show_job_program/'.$recipient_id.'/'.$job_id);
