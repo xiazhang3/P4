@@ -12,6 +12,10 @@ Job/Program Register
 	<br>
 	<br>
 
+	<div class="formInstruction">
+		<p> Add job/program related information for your recommendation letter recipient using the following form</p>
+	</div>
+
 	{{ Form::open(array('url' => 'job_program/'.$recipient_id, 'id' => 'job_program', 'role' => 'form', 'class' => 'form-horizontal', 'files' => true)) }}
 
 	<div class="form-group">
@@ -52,7 +56,9 @@ Job/Program Register
 
 		<div class="form-group">
 		{{Form::label('recommendation_letter', "Recommendation Letter", array('class'=> 'col-sm-2 control-label')) }}
-	    <div class="col-sm-8">
+	    <div class="col-sm-8 fileUpload">
+	    <p>Please upload a file in .doc, .docx, or .pdf format. File size should not exceed 30000 bytes.</p>
+
     	 {{ Form::file('recommendation_letter', '', array('class' => 'form-control', 'accept'=>"application/pdf,application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document")) }}
 	    </div>
 	    <span class="col-sm-offset-2 col-sm-10 help-block errors"> {{ $errors->first('recommendation_letter') }} </span>

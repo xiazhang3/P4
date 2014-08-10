@@ -1,3 +1,12 @@
+.fileUpload p {
+  font-size:100%;
+}
+
+.formInstruction p {
+  color: #FF0000;
+  text-align:center;
+}
+
 .message p {
   color: #FF0000;
 

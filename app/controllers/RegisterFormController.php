@@ -90,6 +90,6 @@ class RegisterFormController extends BaseController {
         # Log the user in
         Auth::login($user);
 
-        return Redirect::to('rec-lett-org')->with('flash_message', 'Welcome!');
+        return Redirect::to('rec-lett-org')->with('flash_message', 'Welcome! To get started, you can enter your first recipient of your recommendation letter above...');
 	}
 }//end of class
